@@ -9,7 +9,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<<<<<<< HEAD
      <maven.compiler.source>1.8</maven.compiler.source>
+=======
+      <maven.compiler.source>1.8</maven.compiler.source>
+>>>>>>> a8a38317a8bccd26efe4ec3bcc6a3409f255965f
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
