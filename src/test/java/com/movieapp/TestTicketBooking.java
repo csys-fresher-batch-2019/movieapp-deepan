@@ -24,21 +24,21 @@ public class TestTicketBooking {
 		Scanner sc=new Scanner(System.in);
 		TicketBooking tb= new TicketBooking();
 		System.out.println("Enter the Movie theatre Id");
-		tb.movieTheaterId=sc.nextInt();
+		tb.setMovieTheaterId(sc.nextInt());
 		System.out.println("Enter the users Id");
-		tb.usersId=sc.nextInt();
+		tb.setUsersId(sc.nextInt());
 		System.out.println("Enter the booked Seats");
-		tb.bookedSeats=sc.nextInt();
+		tb.setBookedSeats(sc.nextInt());
 		System.out.println("Enter the payment status");
-		tb.paymentStatus=sc.next();
+		tb.setPaymentStatus(sc.next());
 		
 		
-		int a=impl.getPrice(tb.movieTheaterId);
+		int a=impl.getPrice(tb.getMovieTheaterId());
 		System.out.println("Movie Ticket Price:"+a);
-		tb.amount=tb.bookedSeats*a;
-		System.out.println(tb.bookedSeats +" Movie Ticket Price:"+tb.amount);
-		Long b=(long) impl.getMobileNumber(tb.usersId);
-		tb.mobileNum=b;
+		tb.setAmount(tb.getBookedSeats()*a);
+		System.out.println(tb.getBookedSeats() +" Movie Ticket Price:"+tb.getAmount());
+		Long b=(long) impl.getMobileNumber(tb.getUsersId());
+		tb.setMobileNum(b);
 		
 		impl.addBookingDetails(tb);
 		System.out.println(tb);
@@ -59,10 +59,10 @@ System.out.println("Mail sent Successfully");
 		Scanner sc=new Scanner(System.in);
 		TicketBooking tb= new TicketBooking();
 		System.out.println("Enter the Movie users Id");
-		tb.usersId=sc.nextInt();
+		tb.setUsersId(sc.nextInt());
 		
 		TicketBookingDAOImpl impl=new TicketBookingDAOImpl();
-		impl.deleteBookingDetails(tb.usersId);
+		impl.deleteBookingDetails(tb.getUsersId());
 		
 	}
 }

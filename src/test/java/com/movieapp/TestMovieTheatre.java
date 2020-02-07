@@ -31,11 +31,11 @@ public class TestMovieTheatre {
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
         MovieTheatre mt=new MovieTheatre();
 		
-		mt.movieId=999;
-		mt.theatreId=1131;
-		mt.active=1;
-		mt.price=100;
-		mt.movieTiming=LocalTime.parse("12:00");
+		mt.setMovieId(999);
+		mt.setTheatreId(1131);
+		mt.setActive(1);
+		mt.setPrice(100);
+		mt.setMovieTiming(LocalTime.parse("12:00"));
 		
         list.add(mt);
 		
@@ -114,11 +114,11 @@ public class TestMovieTheatre {
 		TheatreList tl=new TheatreList();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the Theatre Name:");
-	    tl.theatreName=sc.nextLine();
-		list=impl.getMovieTiming(tl.theatreName);
+	    tl.setTheatreName(sc.nextLine());
+		list=impl.getMovieTiming(tl.getTheatreName());
 	    for(MovieTheatre theatre:list)
 		{
-		System.out.println("MovieId:"+theatre.movieId+"-"+"MovieTiming:"+theatre.movieTiming);
+		System.out.println("MovieId:"+theatre.getMovieId()+"-"+"MovieTiming:"+theatre.getMovieTiming());
 		
 		}
 	    sc.close();

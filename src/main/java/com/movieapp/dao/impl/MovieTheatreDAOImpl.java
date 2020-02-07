@@ -15,51 +15,61 @@ public class MovieTheatreDAOImpl implements MovieTheatreDAO {
 	
 
 	public void addMovieTheatre(MovieTheatre theatre) throws Exception {
-		
-		Connection con=DbConnection.getConnection();
 		String sql="insert into movie_theatre(movie_theatre_id,movie_id,theatre_id,active,price,movie_timing)values(movie_theatre_id_seq.nextval,?,?,?,?,?)";
 		System.out.println("");
 		//System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,theatre.movieId);
-		pst.setInt(2,theatre.theatreId);
-		pst.setInt(3,theatre.active);
-		pst.setInt(4,theatre.price);
-		pst.setString(5,theatre.movieTiming.toString());
-		int row=pst. executeUpdate();
-		System.out.println(row);
-		con.close();
+		try (	Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);){
+			pst.setInt(1,theatre.getMovieId());
+			pst.setInt(2,theatre.getTheatreId());
+			pst.setInt(3,theatre.getActive());
+			pst.setInt(4,theatre.getPrice());
+			pst.setString(5,theatre.getMovieTiming().toString());
+			int row=pst. executeUpdate();
+			System.out.println(row);
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		
 	}
 
 	public void updateMovieTheatre(int movieTheatreId,String movieTiming) throws Exception {
-		// TODO Auto-generated method stub
-		Connection con=DbConnection.getConnection();
 		String sql="update movie_theatre set movie_timing=? where movie_theatre_id=?";
 		System.out.println("");
 		//System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setString(1,movieTiming.toString());
-		pst.setInt(2,movieTheatreId);
-		
-		int row=pst. executeUpdate();
-		System.out.println(row);
-		con.close();
+		try( Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);)
+		{
+			pst.setString(1,movieTiming.toString());
+			pst.setInt(2,movieTheatreId);
+			
+			int row=pst. executeUpdate();
+			System.out.println(row);
+			con.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	public void deleteMovieTheatre(int movieTheatreId) throws Exception {
-		// TODO Auto-generated method stub
-		Connection con=DbConnection.getConnection();
 		String sql="delete from  movie_theatre where movie_theatre_id=?";
 		System.out.println("");
 		//System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,movieTheatreId);
-		int row=pst. executeUpdate();
-		System.out.println(row);
-		con.close();
+		try (	Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);)
+		{
+			pst.setInt(1,movieTheatreId);
+			int row=pst. executeUpdate();
+			System.out.println(row);
+			con.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 		
@@ -76,12 +86,12 @@ public class MovieTheatreDAOImpl implements MovieTheatreDAO {
 		while(rs.next())
 	    {
 			MovieTheatre ml = new MovieTheatre();
-			ml.movieTheatreId=rs.getInt("movie_theatre_id");
-			ml.movieId=rs.getInt("movie_id");
-			ml.theatreId=rs.getInt("theatre_id");
-			ml.active=rs.getInt("active");
-			ml.price=rs.getInt("price");
-			ml.movieTiming=LocalTime.parse(rs.getString("movie_timing"));
+			ml.setMovieTheatreId(rs.getInt("movie_theatre_id"));
+			ml.setMovieId(rs.getInt("movie_id"));
+			ml.setTheatreId(rs.getInt("theatre_id"));
+			ml.setActive(rs.getInt("active"));
+			ml.setPrice(rs.getInt("price"));
+			ml.setMovieTiming(LocalTime.parse(rs.getString("movie_timing")));
 			list.add(ml);
 		}
 		con.close();
@@ -89,79 +99,93 @@ public class MovieTheatreDAOImpl implements MovieTheatreDAO {
 	}
 
 	public void updateMoviePrice(int price,int movieTheatreId) throws Exception {
-		// TODO Auto-generated method stub
-		Connection con=DbConnection.getConnection();
 		String sql="update movie_theatre set price=? where movie_theatre_id=?";
 		System.out.println("");
 		//System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,price);
-		pst.setInt(2,movieTheatreId);
-		int row=pst. executeUpdate();
-		System.out.println(row);
-		con.close();
+		try (	Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);)
+		{
+			pst.setInt(1,price);
+			pst.setInt(2,movieTheatreId);
+			int row=pst. executeUpdate();
+			System.out.println(row);
+			con.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	public List<MovieTheatre> getMovieTiming(String theatreName) throws Exception {
-		
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
-		Connection con=DbConnection.getConnection();
 		String sql="select movie_id,movie_timing from movie_theatre where theatre_id in(select theatre_id from theatre where theatre_name=?)";
 		System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setString(1,theatreName);
-		ResultSet rs=pst.executeQuery();
-		while(rs.next())
-	    {
-			MovieTheatre tl = new MovieTheatre();
-			tl.movieId=rs.getInt("movie_id");
-			tl.movieTiming=LocalTime.parse(rs.getString("movie_timing"));
-		    list.add(tl);
+		try (	Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);)
+		{
+			pst.setString(1,theatreName);
+			ResultSet rs=pst.executeQuery();
+			while(rs.next())
+			{
+				MovieTheatre tl = new MovieTheatre();
+				tl.setMovieId(rs.getInt("movie_id"));
+				tl.setMovieTiming(LocalTime.parse(rs.getString("movie_timing")));
+			    list.add(tl);
+			}
+			con.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		con.close();
 
 		return list;
 	}
 
 	
 	public List<MovieTheatre> getNumSeats(int movieId) throws Exception {
-		// TODO Auto-generated method stub
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
-		Connection con=DbConnection.getConnection();
 		String sql="Select number_seats from movie_theatre where movie_id=?";
 		System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,movieId);
-		ResultSet rs=pst.executeQuery();
-		while(rs.next())
-	    {
-			MovieTheatre ml = new MovieTheatre();
-			ml.movieTheatreId=rs.getInt("movie_theatre_id");
-			ml.movieId=rs.getInt("movie_id");
-			ml.theatreId=rs.getInt("theatre_id");
-			ml.active=rs.getInt("active");
-			ml.price=rs.getInt("price");
-			ml.movieTiming=rs.getTime("movie_timing").toLocalTime();
-			list.add(ml);
+		try (	Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);)
+		{
+			pst.setInt(1,movieId);
+			ResultSet rs=pst.executeQuery();
+			while(rs.next())
+			{
+				MovieTheatre ml = new MovieTheatre();
+				ml.setMovieTheatreId(rs.getInt("movie_theatre_id"));
+				ml.setMovieId(rs.getInt("movie_id"));
+				ml.setTheatreId(rs.getInt("theatre_id"));
+				ml.setActive(rs.getInt("active"));
+				ml.setPrice(rs.getInt("price"));
+				ml.setMovieTiming(rs.getTime("movie_timing").toLocalTime());
+				list.add(ml);
+			}
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		con.close();
 		return list;
 	
 	}
 
 	public void updateMovieStatus(int active, int movieTheatreId) throws Exception {
-		
-		Connection con=DbConnection.getConnection();
 		String sql="update movie_theatre set active=? where movie_theatre_id=?";
 		System.out.println("");
 		System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,active);
-		pst.setInt(2,movieTheatreId);
-		int row=pst. executeUpdate();
-		System.out.println(row);
-		con.close();	
+		try (	Connection con=DbConnection.getConnection();
+				PreparedStatement pst=con.prepareStatement(sql);)
+		{
+			pst.setInt(1,active);
+			pst.setInt(2,movieTheatreId);
+			int row=pst. executeUpdate();
+			System.out.println(row);
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
 	}
 
 	

@@ -28,10 +28,10 @@ public class TestTheatreList {
 
 		 TheatreList t1=new TheatreList();
 
-		 t1.theatreName="kamala cinemas";
-		 t1.numberSeats=230;
-		 t1.theatreAddress="vadapalani chennai";
-		 t1.theatreRating=4;
+		 t1.setTheatreName("kamala cinemas");
+		 t1.setNumberSeats(230);
+		 t1.setTheatreAddress("vadapalani chennai");
+		 t1.setTheatreRating(4);
 		 list.add(t1);
 
 		 TheatreListDAOImpl obj=new TheatreListDAOImpl();
@@ -88,7 +88,7 @@ public class TestTheatreList {
 			list=obj.getTheatreName(theatreAddress);
 			for(TheatreList theatreList:list)
 			{
-			System.out.println(theatreList.theatreName);
+			System.out.println(theatreList.getTheatreName());
 			}
 			
          }

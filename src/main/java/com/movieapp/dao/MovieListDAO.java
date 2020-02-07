@@ -15,9 +15,9 @@ public interface MovieListDAO {
     
     List<MovieList> getmovieName(String movieLanguage,String movieType) throws Exception;
     
-    List<MovieList> allMovieDetails() throws Exception;
+    List<MovieList> allMovieDetails(String movieName) throws Exception;
     
-	List allMovieList() throws Exception;
+	List<MovieList> allMovieList() throws Exception;
 	
 	
 

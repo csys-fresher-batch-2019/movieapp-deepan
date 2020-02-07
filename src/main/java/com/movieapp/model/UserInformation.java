@@ -43,5 +43,5 @@ public class UserInformation {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
+	
 }

@@ -26,9 +26,9 @@ public class SubMovieTheatreImpl {
 		while (rs.next()) {
 			
 			SubMovieTheatre sm = new SubMovieTheatre();
-			sm.movieName=rs.getString("movie_name");
-			sm.theatreName=rs.getString("theatre_name");
-			sm.availableSeats=rs.getInt("AVAILABLE_SEATS");
+			sm.setMovieName(rs.getString("movie_name"));
+			sm.setTheatreName(rs.getString("theatre_name"));
+			sm.setAvailableSeats(rs.getInt("AVAILABLE_SEATS"));
 			list.add(sm);
 		}
 

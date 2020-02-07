@@ -20,7 +20,7 @@ public class TestMovieList {
 		//testDeleteMovie();
 		//testGetmovieName();
 		//testRecentMovies();
-		//testAllMovieDetails();
+		testAllMovieDetails();
 	}
 	
     private static void testAddMovie() throws Exception {
@@ -28,12 +28,12 @@ public class TestMovieList {
 		ArrayList<MovieList> List=new ArrayList<MovieList>();
 		MovieList ml=new MovieList();
 	
-		ml.movieName="endru endrum punnagai";
-		ml.movieDuration=3;
-		ml.movieLanguage="Tamil";
-		ml.movieRating=5;
-		ml.movieType="comedy";
-		ml.releasedDate=LocalDate.parse("2020-10-26");
+		ml.setMovieName("endru endrum punnagai");
+		ml.setMovieDuration(3);
+		ml.setMovieLanguage("Tamil");
+		ml.setMovieRating(5);
+		ml.setMovieType("comedy");
+		ml.setReleasedDate(LocalDate.parse("2020-10-26"));
 		List.add(ml);
 		
 	
@@ -97,7 +97,7 @@ public class TestMovieList {
 		list=obj.getmovieName(movieLanguage,movieType);
 		for(MovieList movie:list)
 		{
-			System.out.println("[MovieName: "+movie.movieName+"]");
+			System.out.println("[MovieName: "+movie.getMovieName()+"]");
 		}
 	}
 	                                                             //recent released movie using date
@@ -109,7 +109,7 @@ public class TestMovieList {
 
 		for(MovieList movie:list)
 		{
-			System.out.println("[MovieName: "+movie.movieName+" , ReleasedDate: "+movie.releasedDate+"]");
+			System.out.println("[MovieName: "+movie.getMovieName()+" , ReleasedDate: "+movie.getReleasedDate()+"]");
 		}
 	}
 	
@@ -119,7 +119,7 @@ public class TestMovieList {
 				MovieListDAOImpl obj =  new  MovieListDAOImpl();
 				List<MovieList> list=new ArrayList<MovieList>();
 				System.out.println("***List All Movie Details***");
-				list=obj.allMovieDetails();
+				list=obj.allMovieDetails("ch");
 				for (MovieList movieList : list) 
 				{
 					System.out.println(movieList);
