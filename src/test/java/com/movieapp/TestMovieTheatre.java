@@ -20,7 +20,7 @@ public class TestMovieTheatre {
 		//testDelete();
 		//testGetTheatreDetails();
 		//testUpdateMoviePrice();
-		//testMovieTiming();
+		testMovieTiming();
         //testUpdateMovieStatus();
 		
 		
@@ -111,6 +111,7 @@ public class TestMovieTheatre {
 	{
 		MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
+		
 		TheatreList tl=new TheatreList();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the Theatre Name:");

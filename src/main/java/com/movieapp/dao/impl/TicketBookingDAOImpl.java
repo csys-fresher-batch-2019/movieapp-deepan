@@ -12,7 +12,8 @@ public class TicketBookingDAOImpl implements TicketBookingDAO {
 	public void addBookingDetails(TicketBooking booked) throws Exception {
 		String sql = "insert into booked(movie_theatre_id,booked_id,users_id,booked_seats,amount,payment_status,mobile_num)values(?,booked_id.nextval,?,?,?,?,?)";
 		// System.out.println(sql);
-		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+		try (Connection con = DbConnection.getConnection(); 
+			 PreparedStatement pst = con.prepareStatement(sql);) {
 			pst.setInt(1, booked.getMovieTheaterId());
 			// pst.setInt(2,booked.bookedId);
 			pst.setInt(2, booked.getUsersId());
@@ -31,7 +32,8 @@ public class TicketBookingDAOImpl implements TicketBookingDAO {
 	public void deleteBookingDetails(int usersId) throws Exception {
 		String sql = "delete from booked where users_id=?";
 		// System.out.println(sql);
-		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+		try (Connection con = DbConnection.getConnection(); 
+			 PreparedStatement pst = con.prepareStatement(sql);) {
 			pst.setInt(1, usersId);
 			int row = pst.executeUpdate();
 			System.out.println(row);
@@ -46,9 +48,10 @@ public class TicketBookingDAOImpl implements TicketBookingDAO {
 		System.out.println("");
 		// System.out.println(sql);
 		int a=(Integer) null;
-		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+		try (Connection con = DbConnection.getConnection(); 
+			 PreparedStatement pst = con.prepareStatement(sql);
+			 ResultSet rs = pst.executeQuery();) {
 			pst.setInt(1, movieTheatreId);
-			ResultSet rs = pst.executeQuery();
 			a = 0;
 			if (rs.next()) {
 				a = rs.getInt("price");
@@ -65,9 +68,10 @@ public class TicketBookingDAOImpl implements TicketBookingDAO {
 		System.out.println("");
 		// System.out.println(sql);
 		Long a=null;
-		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+		try (Connection con = DbConnection.getConnection();
+			PreparedStatement pst = con.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();) {
 			pst.setInt(1, usersId);
-			ResultSet rs = pst.executeQuery();
 			a = (long) 0;
 			if (rs.next()) {
 				a = rs.getLong("mobile_num");

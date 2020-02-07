@@ -55,10 +55,11 @@ public class UserInformationImpl implements UserInformationDAO{
             String sql = "select email_id,epassword from users where email_id= '" + emailId + "' and epassword = '"+ epassword + "'";
 			//System.out.println(sql);
             String s=null;
-			try (Connection con=DbConnection.getConnection();)
+			try (Connection con=DbConnection.getConnection();
+				ResultSet row = con.createStatement().executeQuery(sql);
+)
 			{
 				
-				ResultSet row = con.createStatement().executeQuery(sql);
 				if (row.next())
 				{
 					String emailid1 = row.getString("email_id");

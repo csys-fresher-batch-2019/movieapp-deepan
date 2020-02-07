@@ -76,26 +76,30 @@ public class MovieTheatreDAOImpl implements MovieTheatreDAO {
 	public List<MovieTheatre> getTheatreDetails(int movieId) throws Exception {
 
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
-		Connection con=DbConnection.getConnection();
 		String sql="Select movie_theatre_id,movie_id,theatre_id,active,price,movie_timing from movie_theatre where movie_id=?";
 		System.out.println("");
 		//System.out.println(sql);
-		PreparedStatement pst=con.prepareStatement(sql);
-		pst.setInt(1,movieId);
-		ResultSet rs=pst.executeQuery();
-		while(rs.next())
-	    {
-			MovieTheatre ml = new MovieTheatre();
-			ml.setMovieTheatreId(rs.getInt("movie_theatre_id"));
-			ml.setMovieId(rs.getInt("movie_id"));
-			ml.setTheatreId(rs.getInt("theatre_id"));
-			ml.setActive(rs.getInt("active"));
-			ml.setPrice(rs.getInt("price"));
-			ml.setMovieTiming(LocalTime.parse(rs.getString("movie_timing")));
-			list.add(ml);
+		try(		Connection con=DbConnection.getConnection();
+				    PreparedStatement pst=con.prepareStatement(sql);
+				   ResultSet rs=pst.executeQuery();)
+		{
+			pst.setInt(1,movieId);
+			while(rs.next())
+			{
+				MovieTheatre ml = new MovieTheatre();
+				ml.setMovieTheatreId(rs.getInt("movie_theatre_id"));
+				ml.setMovieId(rs.getInt("movie_id"));
+				ml.setTheatreId(rs.getInt("theatre_id"));
+				ml.setActive(rs.getInt("active"));
+				ml.setPrice(rs.getInt("price"));
+				ml.setMovieTiming(LocalTime.parse(rs.getString("movie_timing")));
+				list.add(ml);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		con.close();
 		return list;
+
 	}
 
 	public void updateMoviePrice(int price,int movieTheatreId) throws Exception {
@@ -122,10 +126,11 @@ public class MovieTheatreDAOImpl implements MovieTheatreDAO {
 		String sql="select movie_id,movie_timing from movie_theatre where theatre_id in(select theatre_id from theatre where theatre_name=?)";
 		System.out.println(sql);
 		try (	Connection con=DbConnection.getConnection();
-				PreparedStatement pst=con.prepareStatement(sql);)
+				PreparedStatement pst=con.prepareStatement(sql);
+				ResultSet rs=pst.executeQuery();)
 		{
+			System.out.println("deepan");
 			pst.setString(1,theatreName);
-			ResultSet rs=pst.executeQuery();
 			while(rs.next())
 			{
 				MovieTheatre tl = new MovieTheatre();
@@ -148,10 +153,10 @@ public class MovieTheatreDAOImpl implements MovieTheatreDAO {
 		String sql="Select number_seats from movie_theatre where movie_id=?";
 		System.out.println(sql);
 		try (	Connection con=DbConnection.getConnection();
-				PreparedStatement pst=con.prepareStatement(sql);)
+				PreparedStatement pst=con.prepareStatement(sql);
+				ResultSet rs=pst.executeQuery();)
 		{
 			pst.setInt(1,movieId);
-			ResultSet rs=pst.executeQuery();
 			while(rs.next())
 			{
 				MovieTheatre ml = new MovieTheatre();

@@ -11,13 +11,22 @@ public class MovieList {
 	private String movieLanguage;
 	private int movieRating;
 	private int movieDuration;
+	private String imageUrl;
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	private LocalDate releasedDate;
 	
 	@Override
 	public String toString() {
-		return "MovieList [movieId=" + getMovieId() + ", movieName=" + getMovieName() + ", movieType=" + getMovieType()
-				+ ", movieLanguage=" + getMovieLanguage() + ", movieRating=" + getMovieRating() + ", movieDuration="
-				+ getMovieDuration() + ", releasedDate=" + getReleasedDate()+ "]";
+		return "MovieList [movieId=" + movieId + ", movieName=" + movieName + ", movieType=" + movieType
+				+ ", movieLanguage=" + movieLanguage + ", movieRating=" + movieRating + ", movieDuration="
+				+ movieDuration + ", imageUrl=" + imageUrl + ", releasedDate=" + releasedDate + "]";
 	}
 
 	/**

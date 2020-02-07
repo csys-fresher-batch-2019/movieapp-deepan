@@ -19,8 +19,8 @@ public class TestMovieList {
 		//testUpdateMovie();
 		//testDeleteMovie();
 		//testGetmovieName();
-		//testRecentMovies();
-		testAllMovieDetails();
+		testRecentMovies();
+		//testAllMovieDetails();
 	}
 	
     private static void testAddMovie() throws Exception {
@@ -109,7 +109,7 @@ public class TestMovieList {
 
 		for(MovieList movie:list)
 		{
-			System.out.println("[MovieName: "+movie.getMovieName()+" , ReleasedDate: "+movie.getReleasedDate()+"]");
+			System.out.println("[MovieName: "+movie.getMovieName()+",MovieLanguage: "+movie.getMovieLanguage()+",MovieType: "+movie.getMovieType()+",MovieRating: "+movie.getMovieRating()+",MovieDuration: "+movie.getMovieDuration()+" , ReleasedDate: "+movie.getReleasedDate()+"]");
 		}
 	}
 	
@@ -119,7 +119,7 @@ public class TestMovieList {
 				MovieListDAOImpl obj =  new  MovieListDAOImpl();
 				List<MovieList> list=new ArrayList<MovieList>();
 				System.out.println("***List All Movie Details***");
-				list=obj.allMovieDetails("ch");
+				list=obj.allMovieDetails("charlie");
 				for (MovieList movieList : list) 
 				{
 					System.out.println(movieList);

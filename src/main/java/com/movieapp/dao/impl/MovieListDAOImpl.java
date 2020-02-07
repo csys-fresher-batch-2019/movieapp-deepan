@@ -4,16 +4,15 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.movieapp.DbConnection;
 import com.movieapp.dao.MovieListDAO;
 import com.movieapp.model.MovieList;
-import com.movieapp.model.MovieTheatre;
 
 public class MovieListDAOImpl implements MovieListDAO {
 
@@ -89,11 +88,12 @@ public class MovieListDAOImpl implements MovieListDAO {
 		//System.out.println(sqla);
 		System.out.println("");
 		try (	Connection con = DbConnection.getConnection();
-				PreparedStatement stmta = con.prepareStatement(sqla);)
+				PreparedStatement stmta = con.prepareStatement(sqla);
+				ResultSet rs = stmta.executeQuery();
+)
 		{
 			stmta.setString(1, movieLanguage);
 			stmta.setString(2, movieType);
-			ResultSet rs = stmta.executeQuery();
 			while (rs.next()) 
 			{
 				MovieList ml = new MovieList();
@@ -110,16 +110,22 @@ public class MovieListDAOImpl implements MovieListDAO {
     public List<MovieList> allMovieList() throws Exception {
 		
 		List<MovieList> list = new ArrayList<MovieList>();
-		String sqla = "select movie_name,released_date from movie order by released_date desc";
+		String sqla = "select movie_name,released_date,image_url,movie_language,movie_type,movie_rating,movie_duration from movie order by released_date desc";
 		System.out.println("");
 		//System.out.println(sqla);
-		try(	Connection con = DbConnection.getConnection();)
+		try(	Connection con = DbConnection.getConnection();Statement stmta = con.createStatement();
+				ResultSet rs = stmta.executeQuery(sqla);)
 		{
-			Statement stmta = con.createStatement();
-			ResultSet rs = stmta.executeQuery(sqla);
+			
 			while (rs.next()) {
 				MovieList ml = new MovieList();
 				ml.setMovieName(rs.getString("movie_name"));
+				ml.setImageUrl(rs.getString("image_url"));
+				ml.setMovieLanguage(rs.getString("movie_language"));
+				ml.setMovieType(rs.getString("movie_type"));
+				ml.setMovieRating(rs.getInt("movie_rating"));
+				ml.setMovieDuration(rs.getInt("movie_duration"));
+				
 				Date rd = rs.getDate("released_date");
 				if (rd != null) {
 					LocalDate ld = rd.toLocalDate();
@@ -127,9 +133,9 @@ public class MovieListDAOImpl implements MovieListDAO {
 				}
 				list.add(ml);
 			}
-			con.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new Exception("Unable to get movie list");
 		}
 		return list;
 
@@ -141,10 +147,11 @@ public class MovieListDAOImpl implements MovieListDAO {
 		String sqla = "Select * from movie where movie_name='"+movieName+"'";
 		System.out.println(sqla);
 		//System.out.println(sqla);
-		try (	Connection con = DbConnection.getConnection();)
+		try (	Connection con = DbConnection.getConnection();
+				Statement stmta = con.createStatement();
+				ResultSet rs = stmta.executeQuery(sqla);)
 		{
-			Statement stmta = con.createStatement();
-			ResultSet rs = stmta.executeQuery(sqla);
+			
 			while (rs.next()) {
 				MovieList ml = new MovieList();
 				ml.setMovieId(rs.getInt("movie_id"));
