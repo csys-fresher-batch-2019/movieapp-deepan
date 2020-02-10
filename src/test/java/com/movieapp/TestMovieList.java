@@ -13,17 +13,17 @@ import com.movieapp.model.MovieList;
 
 public class TestMovieList {
 	
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws DbException{
 		
 		//testAddMovie();
 		//testUpdateMovie();
 		//testDeleteMovie();
 		//testGetmovieName();
-		testRecentMovies();
-		//testAllMovieDetails();
+		//testRecentMovies();
+		testAllMovieDetails();
 	}
 	
-    private static void testAddMovie() throws Exception {
+    private static void testAddMovie() throws DbException {
 		
 		ArrayList<MovieList> List=new ArrayList<MovieList>();
 		MovieList ml=new MovieList();
@@ -48,7 +48,7 @@ public class TestMovieList {
 	} 
     
 
-	private static void testUpdateMovie() throws Exception 
+	private static void testUpdateMovie() throws DbException 
 	{
 		Scanner sc=new Scanner(System.in);
 		MovieListDAOImpl obj =  new  MovieListDAOImpl();
@@ -71,7 +71,7 @@ public class TestMovieList {
 	}
 	
 	
-	private static void testDeleteMovie() throws Exception 
+	private static void testDeleteMovie() throws DbException 
 	{
 		Scanner sc=new Scanner(System.in);
 		MovieListDAOImpl obj =  new  MovieListDAOImpl();
@@ -83,7 +83,7 @@ public class TestMovieList {
 	
 	                                                                     //language
 	
-	private static void testGetmovieName() throws Exception 
+	private static void testGetmovieName() throws DbException 
 	{
 		Scanner sc=new Scanner(System.in);
 		MovieListDAOImpl obj =  new  MovieListDAOImpl();
@@ -101,7 +101,7 @@ public class TestMovieList {
 		}
 	}
 	                                                             //recent released movie using date
-	private static void testRecentMovies() throws Exception {
+	private static void testRecentMovies() throws DbException {
 		Scanner sc=new Scanner(System.in);
 		MovieListDAOImpl obj =  new  MovieListDAOImpl();
 		System.out.println("### List Movie Name By Released Date ###");
@@ -113,7 +113,7 @@ public class TestMovieList {
 		}
 	}
 	
-	private static void testAllMovieDetails() throws Exception 
+	private static void testAllMovieDetails() throws DbException 
 	{
 		//AllMovieList
 				MovieListDAOImpl obj =  new  MovieListDAOImpl();

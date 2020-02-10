@@ -2,16 +2,18 @@ package com.movieapp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.movieapp.DbConnection;
+import com.movieapp.DbException;
 import com.movieapp.model.SubMovieTheatre;
 
 public class SubMovieTheatreImpl {
 
-	public List<SubMovieTheatre> getAvailableSeats() throws Exception {
+	public List<SubMovieTheatre> getAvailableSeats() throws DbException {
 		List<SubMovieTheatre> list = new ArrayList<SubMovieTheatre>();
      String sqla = "SELECT M.MOVIE_NAME, T.THEATRE_NAME, (  T.NUMBER_SEATS - ( select nvl(SUM(B.BOOKED_SEATS),0) FROM BOOKED B WHERE B.movie_theatre_id = MT.movie_theatre_id))   AS AVAILABLE_SEATS FROM \r\n"
 					+ "THEATRE T, MOVIE_THEATRE MT,MOVIE M\r\n"
@@ -32,9 +34,9 @@ public class SubMovieTheatreImpl {
 				list.add(sm);
 			}
 		}
-		catch(Exception e)
+		catch(SQLException e)
 		{
-			throw new Exception("Error");
+			throw new DbException("Error");
 		}
 
 		return list;

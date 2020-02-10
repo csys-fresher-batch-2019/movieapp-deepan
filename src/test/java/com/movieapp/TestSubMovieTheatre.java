@@ -8,11 +8,11 @@ import com.movieapp.model.SubMovieTheatre;
 
 public class TestSubMovieTheatre {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws DbException {
 		
 		testGetAvailableSeats();
 	}
-	private static void testGetAvailableSeats() throws Exception
+	private static void testGetAvailableSeats() throws DbException
 	{
 		SubMovieTheatreImpl obj =  new  SubMovieTheatreImpl();
 		//selectMovieName

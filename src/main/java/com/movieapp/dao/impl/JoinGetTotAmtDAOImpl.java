@@ -2,17 +2,19 @@ package com.movieapp.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.movieapp.DbConnection;
+import com.movieapp.DbException;
 import com.movieapp.dao.JoinGetTotAmtDAO;
 import com.movieapp.model.JoinGetTotalAmount;
 
 public class JoinGetTotAmtDAOImpl implements JoinGetTotAmtDAO{
 
-	public List<JoinGetTotalAmount> getTotalAmount() throws Exception {
+	public List<JoinGetTotalAmount> getTotalAmount() throws DbException {
 		List<JoinGetTotalAmount> list=new ArrayList<JoinGetTotalAmount>();
 		
 		System.out.println("***Display the Total Amount***");
@@ -34,7 +36,7 @@ public class JoinGetTotAmtDAOImpl implements JoinGetTotAmtDAO{
 				ta.setTotalAmount(rs.getInt("total_amount"));
 				list.add(ta);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

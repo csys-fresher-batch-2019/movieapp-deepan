@@ -8,11 +8,11 @@ import com.movieapp.model.JoinGetTotalAmount;
 
 public class TestJoinGetTotalAmount {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws DbException {
 	
 		testGetTotalAmount();
 	}
-	private static void testGetTotalAmount() throws Exception
+	private static void testGetTotalAmount() throws DbException
 	{
 		JoinGetTotAmtDAOImpl impl=new JoinGetTotAmtDAOImpl();
 		List<JoinGetTotalAmount> list=new ArrayList<JoinGetTotalAmount>();

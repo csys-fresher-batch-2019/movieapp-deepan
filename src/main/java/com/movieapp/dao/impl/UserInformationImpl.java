@@ -3,14 +3,16 @@ package com.movieapp.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.movieapp.DbConnection;
+import com.movieapp.DbException;
 import com.movieapp.dao.UserInformationDAO;
 import com.movieapp.model.UserInformation;
 
 public class UserInformationImpl implements UserInformationDAO{
 
-		public void addUserInformation(UserInformation users) throws Exception {
+		public void addUserInformation(UserInformation users) throws DbException {
 			String sql="insert into users(user_id,user_name,email_id,epassword,mobile_num,gender)values(user_id_seq.nextval,?,?,?,?,?)";
 			//System.out.println(sql);
 			try (   Connection con=DbConnection.getConnection();
@@ -23,7 +25,7 @@ public class UserInformationImpl implements UserInformationDAO{
 				pst.setString(5, users.getGender());
 				int row=pst. executeUpdate();
 				System.out.println(row);
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
@@ -32,7 +34,7 @@ public class UserInformationImpl implements UserInformationDAO{
 		
 		
 
-		public void deleteUserInformation(int userId) throws Exception {
+		public void deleteUserInformation(int userId) throws DbException {
 			String sql="delete from users where user_id=?";
 			//System.out.println(sql);
 			try (	Connection con=DbConnection.getConnection();
@@ -41,7 +43,7 @@ public class UserInformationImpl implements UserInformationDAO{
 		pst.setInt(1,userId);
 				int row=pst. executeUpdate();
 				System.out.println(row);
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -51,7 +53,7 @@ public class UserInformationImpl implements UserInformationDAO{
 		
 		
 		
-		public String login(String emailId, String epassword) throws Exception {
+		public String login(String emailId, String epassword) throws DbException {
             String sql = "select email_id,epassword from users where email_id= '" + emailId + "' and epassword = '"+ epassword + "'";
 			//System.out.println(sql);
             String s=null;
@@ -70,7 +72,7 @@ public class UserInformationImpl implements UserInformationDAO{
 				else
 					s="failure";
 } 
-		catch (Exception e) {
+		catch (SQLException e) {
 				e.printStackTrace();
 			}
 			return(s);
@@ -79,7 +81,7 @@ public class UserInformationImpl implements UserInformationDAO{
 		
 		
 		
-		public String updatePassword(String emailId,String epassword) throws Exception
+		public String updatePassword(String emailId,String epassword) throws DbException
 		{
 			String sqlb = "update users set epassword=? where email_id=?";
 			System.out.println("");
@@ -92,7 +94,7 @@ public class UserInformationImpl implements UserInformationDAO{
 				//System.out.println(rowb);
 			}
 				
-			 catch (Exception e) {
+			 catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

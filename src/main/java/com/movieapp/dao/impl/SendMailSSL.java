@@ -22,7 +22,7 @@ public class SendMailSSL {
 
 	public static void sendEmail(String email) throws IOException {
 		otp = generatorOTP(4);
-		SendMail.send("payrollmavenproject@gmail.com", "Pass1234*", email, "Password Reset Request", "Hello user", otp);
+		SendMail.send("movieappservice@gmail.com", "Deepan@123", email, "Password Reset Request", "Hello user", otp);
 		emailOTP();
 	}
 

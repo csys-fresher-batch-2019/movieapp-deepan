@@ -14,6 +14,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.movieapp.DbException;
+
 public class BookedMail {
 	
 	public static void send(final String from,final String password,String to,String sub,String Msg,int bookedId,int userId,int movieTheatreId,int bookedSeats,int amount) throws Exception

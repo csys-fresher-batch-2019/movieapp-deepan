@@ -13,7 +13,7 @@ import com.movieapp.model.TheatreList;
 
 public class TestTheatreList {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws DbException {
 		
 		  //testInsert();
          // testDeleteTheatreDetails();
@@ -22,7 +22,7 @@ public class TestTheatreList {
          //testGetTheatreName();
 
 	}
-	private static void testInsert() throws Exception
+	private static void testInsert() throws DbException
 	{
 		 List<TheatreList> list=new ArrayList<TheatreList>();
 
@@ -42,7 +42,7 @@ public class TestTheatreList {
 		 System.out.println(theatreList);
 		 }
 	}
-	private static void testDeleteTheatreDetails() throws Exception
+	private static void testDeleteTheatreDetails() throws DbException
 	{
 		TheatreListDAOImpl obj=new TheatreListDAOImpl();
 		Scanner sc=new Scanner(System.in);
@@ -53,7 +53,7 @@ public class TestTheatreList {
 		sc.close();
 		
 	}
-	private static void testUpdateTheatreRating() throws Exception
+	private static void testUpdateTheatreRating() throws DbException
 	{
 		TheatreListDAOImpl obj=new TheatreListDAOImpl();
 		Scanner sc=new Scanner(System.in);
@@ -77,7 +77,7 @@ public class TestTheatreList {
 		System.out.println(theatreList);
 		}
 	}
-	private static void testGetTheatreName() throws Exception
+	private static void testGetTheatreName() throws DbException
 	{
 		 TheatreListDAOImpl obj=new TheatreListDAOImpl();
 		 List<TheatreList> list=new ArrayList<TheatreList>();

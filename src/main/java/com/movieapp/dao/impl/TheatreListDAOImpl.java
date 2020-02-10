@@ -3,19 +3,21 @@ package com.movieapp.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.movieapp.DbConnection;
+import com.movieapp.DbException;
 import com.movieapp.dao.MovieTheatreDAO;
 import com.movieapp.dao.TheatreListDAO;
 import com.movieapp.model.TheatreList;
 
 public class TheatreListDAOImpl implements TheatreListDAO {
 
-	public void addTheatreDetails(TheatreList theatre) throws Exception {
+	public void addTheatreDetails(TheatreList theatre) throws DbException {
 		String sql = "insert into theatre(theatre_name,theatre_id,number_seats,theatre_address,theatre_rating)values(?,theatre_id_seq.nextval,?,?,?)";
 		// System.out.println(sql);
 		try (Connection con = DbConnection.getConnection(); 
@@ -27,13 +29,13 @@ public class TheatreListDAOImpl implements TheatreListDAO {
 			int row = pst.executeUpdate();
 			System.out.println(row);
 			con.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public void deleteTheatreDetails(int theatreId) throws Exception {
+	public void deleteTheatreDetails(int theatreId) throws DbException {
 		String sql = "delete from theatre where theatre_id=?";
 		// System.out.println(sql);
 		try (Connection con = DbConnection.getConnection(); 
@@ -42,13 +44,13 @@ public class TheatreListDAOImpl implements TheatreListDAO {
 			int row = pst.executeUpdate();
 			System.out.println(row);
 			con.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public void updateTheatreRating(int theatreRating, String theatreName) throws Exception {
+	public void updateTheatreRating(int theatreRating, String theatreName) throws DbException {
 		String sql = "update theatre set theatre_rating=? where theatre_name=?";
 		// System.out.println(sql);
 		try (Connection con = DbConnection.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
@@ -57,13 +59,13 @@ public class TheatreListDAOImpl implements TheatreListDAO {
 			int row = pst.executeUpdate();
 			System.out.println(row);
 			con.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public List<TheatreList> allTheatreDetails() throws Exception {
+	public List<TheatreList> allTheatreDetails() throws DbException {
 
 		List<TheatreList> list = new ArrayList<TheatreList>();
 		String sql = "Select theatre_name,theatre_id,number_seats,theatre_address,theatre_rating from theatre";
@@ -81,14 +83,14 @@ public class TheatreListDAOImpl implements TheatreListDAO {
 				tl.setTheatreRating(rs.getInt("theatre_rating"));
 				list.add(tl);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return list;
 	}
 
-	public List<TheatreList> getTheatreName(String theatreAddress) throws Exception {
+	public List<TheatreList> getTheatreName(String theatreAddress) throws DbException {
 		List<TheatreList> list = new ArrayList<TheatreList>();
 		String sql = "Select theatre_name from theatre where theatre_address like ?";
 		// System.out.println(sql);
@@ -102,7 +104,7 @@ public class TheatreListDAOImpl implements TheatreListDAO {
 				list.add(tl);
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 

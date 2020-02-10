@@ -13,7 +13,7 @@ public class TestMovieTheatre {
 	
 	
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws DbException {
 		
 		//testInsert();
 		//testUpdateTime();
@@ -26,7 +26,7 @@ public class TestMovieTheatre {
 		
 	}
 		
-	private static void testInsert() throws Exception {
+	private static void testInsert() throws DbException {
 		
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
         MovieTheatre mt=new MovieTheatre();
@@ -47,7 +47,7 @@ public class TestMovieTheatre {
 		
 		}
 	}
-	private static void testUpdateTime() throws Exception {
+	private static void testUpdateTime() throws DbException {
 
 		MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
 		List<MovieTheatre> list1 = new ArrayList<MovieTheatre>();
@@ -62,7 +62,7 @@ public class TestMovieTheatre {
 		}
 		
 		
-		private static void testDelete() throws Exception {
+		private static void testDelete() throws DbException {
 			
 			Scanner sc=new Scanner(System.in);
 			MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
@@ -75,7 +75,7 @@ public class TestMovieTheatre {
 		}
 		 
                                                                               //To find movie with theatre details	
-		private static void testGetTheatreDetails() throws Exception {
+		private static void testGetTheatreDetails() throws DbException {
           
 			MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
 		   List<MovieTheatre> list = new ArrayList<MovieTheatre>();
@@ -91,7 +91,7 @@ public class TestMovieTheatre {
 		  sc.close();
 		}
 		
-		private static void testUpdateMoviePrice() throws Exception {
+		private static void testUpdateMoviePrice() throws DbException {
 			
 	           MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
 			   List<MovieTheatre> list1 = new ArrayList<MovieTheatre>();
@@ -107,7 +107,7 @@ public class TestMovieTheatre {
  
 		                                                                //To find show Time
 		
-	private static void testMovieTiming() throws Exception
+	private static void testMovieTiming() throws DbException
 	{
 		MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
@@ -125,7 +125,7 @@ public class TestMovieTheatre {
 	    sc.close();
 	}
 	
-	private static void testUpdateMovieStatus() throws Exception {
+	private static void testUpdateMovieStatus() throws DbException {
 		
         MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
 		   Scanner sc=new Scanner(System.in);

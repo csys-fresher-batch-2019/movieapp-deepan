@@ -47,14 +47,14 @@ public class TestTicketBooking {
 		String s=sc.next();
 		if(s.equals("yes"))
 		{
-			BookedMail.send("payrollmavenproject@gmail.com","Pass1234*","deepanraj151997@gmail.com", "Booking Details", "Successfully booked", 1,11156,115,2,300);
+			BookedMail.send("movieappservice@gmail.com","Deepan@123","ajamlahamed@gmail.com", "Booking Details", "Successfully booked", 1,11156,115,2,300);
 System.out.println("Mail sent Successfully");
 		}
 		else
 			System.out.println("Ticket Booked");
 	}
 	
-	public static void testDelete() throws Exception
+	public static void testDelete() throws DbException
 	{
 		Scanner sc=new Scanner(System.in);
 		TicketBooking tb= new TicketBooking();
