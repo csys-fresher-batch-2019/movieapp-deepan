@@ -17,7 +17,9 @@ import com.movieapp.model.MovieList;
 
 public class MovieListDAOImpl implements MovieListDAO {
 
-	public void addMovie(MovieList movie) throws DbException {
+	
+	
+public void addMovie(MovieList movie) throws DbException {
 		
 		String sql = "insert into movie(movie_id,movie_name,movie_type,movie_language,movie_rating,movie_duration,released_date)values(movie_id_seq.nextval,?,?,?,?,?,?)";
 		System.out.println("");
@@ -40,15 +42,16 @@ public class MovieListDAOImpl implements MovieListDAO {
 
 	}
 	
-	public void updateMovieName(String movieName,String movieType,String movieLanguage,int movieRating,int movieDuration,String releasedDate, int movieId) throws DbException {
+	
+
+public void updateMovieName(String movieName,String movieType,String movieLanguage,int movieRating,int movieDuration,String releasedDate, int movieId) throws DbException {
 		
 		String sqlb = "update movie set movie_name=?,movie_type=?,movie_language=?,movie_rating=?,movie_duration=?,released_date=? where movie_id=?";
 		System.out.println("");
 		//System.out.println(sqlb);
 		try (   Connection con = DbConnection.getConnection();
-				PreparedStatement pst = con.prepareStatement(sqlb);
-
-){
+				PreparedStatement pst = con.prepareStatement(sqlb);)
+		{
 			pst.setString(1, movieName);
 			pst.setString(2, movieType);
 			pst.setString(3, movieLanguage);
@@ -65,7 +68,8 @@ public class MovieListDAOImpl implements MovieListDAO {
 	}
 	
 	
-	public void deleteMovieList(int movieId) throws DbException {
+	
+public void deleteMovieList(int movieId) throws DbException {
 	
 		String sql = "delete from movie where movie_id=?";
 		System.out.println("");
@@ -82,7 +86,9 @@ public class MovieListDAOImpl implements MovieListDAO {
 
 	}
 
-	public List<MovieList> getmovieName(String movieLanguage,String movieType) throws DbException {
+	
+
+public List<MovieList> getmovieName(String movieLanguage,String movieType) throws DbException {
 		
 		List<MovieList> list=new ArrayList<MovieList>();
 		String sqla = "Select movie_name from movie where movie_language=? and movie_type=?";
@@ -108,19 +114,22 @@ public class MovieListDAOImpl implements MovieListDAO {
 	}
 
 
-    public List<MovieList> allMovieList() throws DbException {
+    
+
+public List<MovieList> allMovieList() throws DbException {
 		
 		List<MovieList> list = new ArrayList<MovieList>();
-		String sqla = "select movie_name,released_date,image_url,movie_language,movie_type,movie_rating,movie_duration from movie order by released_date desc";
+		String sqla = "select movie_id,movie_name,released_date,image_url,movie_language,movie_type,movie_rating,movie_duration from movie order by released_date desc";
 		System.out.println("");
 		//System.out.println(sqla);
 		try(	Connection con = DbConnection.getConnection();
-				Statement stmta = con.createStatement();
-				ResultSet rs = stmta.executeQuery(sqla);)
+				Statement stmta = con.createStatement();)
 		{
+			try(ResultSet rs = stmta.executeQuery(sqla);){
 			
 			while (rs.next()) {
 				MovieList ml = new MovieList();
+				ml.setMovieId(rs.getInt("movie_id"));
 				ml.setMovieName(rs.getString("movie_name"));
 				ml.setImageUrl(rs.getString("image_url"));
 				ml.setMovieLanguage(rs.getString("movie_language"));
@@ -135,7 +144,7 @@ public class MovieListDAOImpl implements MovieListDAO {
 				}
 				list.add(ml);
 			}
-		} catch (SQLException e) {
+			}	} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DbException("Unable to get movie list");
 		}
@@ -143,17 +152,18 @@ public class MovieListDAOImpl implements MovieListDAO {
 
 	}
 
-		public List<MovieList> allMovieDetails(String movieName) throws DbException {
+		
+
+public List<MovieList> allMovieDetails(String movieName) throws DbException {
 
 		List<MovieList> list = new ArrayList<MovieList>();
 		String sqla = "Select * from movie where movie_name='"+movieName+"'";
 		System.out.println(sqla);
 		//System.out.println(sqla);
 		try (	Connection con = DbConnection.getConnection();
-				Statement stmta = con.createStatement();
-				ResultSet rs = stmta.executeQuery(sqla);)
+				Statement stmta = con.createStatement();)
 		{
-			
+			try(ResultSet rs = stmta.executeQuery(sqla);){
 			while (rs.next()) {
 				MovieList ml = new MovieList();
 				ml.setMovieId(rs.getInt("movie_id"));
@@ -169,7 +179,7 @@ public class MovieListDAOImpl implements MovieListDAO {
 				}
 				list.add(ml);
 			}
-		} catch (SQLException e) {
+			}} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;

@@ -1,5 +1,6 @@
 package com.movieapp.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TicketBooking {
@@ -11,11 +12,12 @@ public class TicketBooking {
 	private String paymentStatus;
 	private Date bookedDate;
 	private Long mobileNum;
+	private LocalDate showDate;
 	@Override
 	public String toString() {
 		return "TicketBooking [movieTheaterId=" + getMovieTheaterId() + ", bookedId=" + bookedId + ", usersId=" + getUsersId()
 				+ ", bookedSeats=" + getBookedSeats() + ", amount=" + getAmount() + ", paymentStatus=" + getPaymentStatus()
-				+ ", bookedDate=" + bookedDate + ", mobileNum=" + getMobileNum() + "]";
+				+ ", bookedDate=" + bookedDate + ", mobileNum=" + getMobileNum() + ",showDate="+getShowDate()+"]";
 	}
 	public int getMovieTheaterId() {
 		return movieTheaterId;
@@ -23,58 +25,60 @@ public class TicketBooking {
 	public void setMovieTheaterId(int movieTheaterId) {
 		this.movieTheaterId = movieTheaterId;
 	}
+	public int getBookedId() {
+		return bookedId;
+	}
+	public void setBookedId(int bookedId) {
+		this.bookedId = bookedId;
+	}
 	public int getUsersId() {
 		return usersId;
 	}
 	public void setUsersId(int usersId) {
 		this.usersId = usersId;
 	}
-	/**
-	 * @return the bookedSeats
-	 */
 	public int getBookedSeats() {
 		return bookedSeats;
 	}
-	/**
-	 * @param bookedSeats the bookedSeats to set
-	 */
 	public void setBookedSeats(int bookedSeats) {
 		this.bookedSeats = bookedSeats;
 	}
-	/**
-	 * @return the amount
-	 */
 	public int getAmount() {
 		return amount;
 	}
-	/**
-	 * @param amount the amount to set
-	 */
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	/**
-	 * @return the paymentStatus
-	 */
 	public String getPaymentStatus() {
 		return paymentStatus;
 	}
-	/**
-	 * @param paymentStatus the paymentStatus to set
-	 */
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
-	/**
-	 * @return the mobileNum
-	 */
+	public Date getBookedDate() {
+		return bookedDate;
+	}
+	public void setBookedDate(Date bookedDate) {
+		this.bookedDate = bookedDate;
+	}
 	public Long getMobileNum() {
 		return mobileNum;
 	}
-	/**
-	 * @param mobileNum the mobileNum to set
-	 */
 	public void setMobileNum(Long mobileNum) {
 		this.mobileNum = mobileNum;
 	}
+	/**
+	 * @return the showDate
+	 */
+	public LocalDate getShowDate() {
+		return showDate;
+	}
+	/**
+	 * @param showDate the showDate to set
+	 */
+	public void setShowDate(LocalDate showDate) {
+		this.showDate = showDate;
+	}
+	
 }
+	

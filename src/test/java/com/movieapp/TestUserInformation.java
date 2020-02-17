@@ -57,7 +57,7 @@ public class TestUserInformation {
 	}
 	
 
-	private static String testLoginCheck() throws Exception {
+	private static void testLoginCheck() throws Exception {
 
 		UserInformationImpl obj = new UserInformationImpl();
 		Scanner sc = new Scanner(System.in);
@@ -67,8 +67,8 @@ public class TestUserInformation {
 		String epassword = sc.next();
 
 		try {
-			String str = obj.login(emailId, epassword);
-			if (str.equals("failure"))
+			Integer str = obj.login(emailId, epassword);
+			if (str==null)
 			{
 				testForgetPassword(emailId);
 			}
@@ -81,7 +81,6 @@ public class TestUserInformation {
 			e.printStackTrace();
 
 		}
-		return emailId;
 
 	}
 	
@@ -104,7 +103,7 @@ public class TestUserInformation {
 			String pass = sc.next();
 			UserInformationImpl im = new UserInformationImpl();
 			
-			String password=im.updatePassword(email, pass);
+			boolean password=im.updatePassword(email, pass);
 			System.out.println("Your Password is Sucessfully Changed"+password+""+email);
 
 		} else

@@ -15,13 +15,14 @@ public class TestMovieTheatre {
 
 	public static void main(String[] args) throws DbException {
 		
-		//testInsert();
+		testInsert();
 		//testUpdateTime();
 		//testDelete();
 		//testGetTheatreDetails();
 		//testUpdateMoviePrice();
-		testMovieTiming();
+		//testMovieTiming();
         //testUpdateMovieStatus();
+		testActiveTheatre();
 		
 		
 	}
@@ -31,11 +32,11 @@ public class TestMovieTheatre {
 		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
         MovieTheatre mt=new MovieTheatre();
 		
-		mt.setMovieId(999);
-		mt.setTheatreId(1131);
+		mt.setMovieId(1001);
+		mt.setTheatreId(1151);
 		mt.setActive(1);
 		mt.setPrice(100);
-		mt.setMovieTiming(LocalTime.parse("12:00"));
+		mt.setMovieTiming(LocalTime.parse("03:00"));
 		
         list.add(mt);
 		
@@ -137,5 +138,21 @@ public class TestMovieTheatre {
 		   impl.updateMovieStatus(active,movieTheatreId);
 		   sc.close();
 	}
+	
+	private static void testActiveTheatre() throws DbException {
+           MovieTheatreDAOImpl impl= new MovieTheatreDAOImpl();
+   		List<MovieTheatre> list = new ArrayList<MovieTheatre>();
+
+           list=impl.getActiveTheatreDetails(999);
+   	    for(MovieTheatre theatre:list)
+   		{
+   		System.out.println(theatre);
+   		
+   		}
+			
+        
+
+	}
+
 
 }

@@ -20,8 +20,10 @@ public class SubMovieTheatreImpl {
 					+ "WHERE m.movie_id = mt.movie_id AND t.theatre_id = MT.THEATRE_ID";
 			System.out.println("");
 			try (Connection con = DbConnection.getConnection(); 
-					Statement stmta = con.createStatement();
-					ResultSet rs = stmta.executeQuery(sqla);) {
+					Statement stmta = con.createStatement();){
+				
+			
+					try(ResultSet rs = stmta.executeQuery(sqla);) {
 
 
 			// System.out.println(sqla);
@@ -34,7 +36,7 @@ public class SubMovieTheatreImpl {
 				list.add(sm);
 			}
 		}
-		catch(SQLException e)
+			}	catch(SQLException e)
 		{
 			throw new DbException("Error");
 		}

@@ -1,14 +1,10 @@
 package com.movieapp;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.movieapp.dao.impl.MovieListDAOImpl;
-import com.movieapp.dao.impl.MovieTheatreDAOImpl;
 import com.movieapp.dao.impl.TheatreListDAOImpl;
-import com.movieapp.model.MovieTheatre;
 import com.movieapp.model.TheatreList;
 
 public class TestTheatreList {
@@ -18,7 +14,7 @@ public class TestTheatreList {
 		  //testInsert();
          // testDeleteTheatreDetails();
          // testUpdateTheatreRating();
-         //testAllTheatreDetails();
+        //testAllTheatreDetails();
          //testGetTheatreName();
 
 	}
@@ -66,7 +62,7 @@ public class TestTheatreList {
 		sc.close();
 	}
 	
-	private static void testAllTheatreDetails() throws Exception
+	private static void testAllTheatreDetails() throws DbException
 	{
 		 List<TheatreList> list=new ArrayList<TheatreList>();
 		 TheatreListDAOImpl obj=new TheatreListDAOImpl();

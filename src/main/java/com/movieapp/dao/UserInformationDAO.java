@@ -7,8 +7,8 @@ public interface UserInformationDAO {
 	
 	void addUserInformation(UserInformation users) throws DbException;
 	void deleteUserInformation(int userId) throws DbException;
-	String login(String emailId, String epassword) throws DbException;
-	String updatePassword(String emailId,String epassword) throws DbException;
-	
+	Integer login(String emailId, String epassword) throws DbException;
+	boolean updatePassword(String emailId,String epassword) throws DbException;
+	String getEmailId(int userId) throws DbException;
 
 }

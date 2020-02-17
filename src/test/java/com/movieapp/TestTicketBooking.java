@@ -1,9 +1,11 @@
 package com.movieapp;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.movieapp.dao.impl.BookedMail;
 import com.movieapp.dao.impl.TicketBookingDAOImpl;
+import com.movieapp.dao.impl.UserInformationImpl;
 import com.movieapp.model.TicketBooking;
 
 
@@ -27,11 +29,12 @@ public class TestTicketBooking {
 		tb.setMovieTheaterId(sc.nextInt());
 		System.out.println("Enter the users Id");
 		tb.setUsersId(sc.nextInt());
-		System.out.println("Enter the booked Seats");
-		tb.setBookedSeats(sc.nextInt());
-		System.out.println("Enter the payment status");
-		tb.setPaymentStatus(sc.next());
 		
+		System.out.println("Enter the Number of Seats");
+		tb.setBookedSeats(sc.nextInt());
+		
+		System.out.println("Enter the show date");
+		tb.setShowDate(LocalDate.parse(sc.next()));
 		
 		int a=impl.getPrice(tb.getMovieTheaterId());
 		System.out.println("Movie Ticket Price:"+a);
@@ -40,15 +43,18 @@ public class TestTicketBooking {
 		Long b=(long) impl.getMobileNumber(tb.getUsersId());
 		tb.setMobileNum(b);
 		
+		//int bookingId = 0;
 		impl.addBookingDetails(tb);
 		System.out.println(tb);
 		
 		System.out.println("Do You Want To Send Mail:(yes/no)");
+		UserInformationImpl ui=new UserInformationImpl();
+		String Email=ui.getEmailId(tb.getUsersId());
 		String s=sc.next();
 		if(s.equals("yes"))
 		{
-			BookedMail.send("movieappservice@gmail.com","Deepan@123","ajamlahamed@gmail.com", "Booking Details", "Successfully booked", 1,11156,115,2,300);
-System.out.println("Mail sent Successfully");
+			BookedMail.send("movieappservice@gmail.com","Deepan@123",Email, "Booking Details", "Successfully booked",1,tb.getUsersId(),tb.getMovieTheaterId(),tb.getBookedSeats(),tb.getAmount());
+            System.out.println(Email+" Mail sent Successfully");
 		}
 		else
 			System.out.println("Ticket Booked");

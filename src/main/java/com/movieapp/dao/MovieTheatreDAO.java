@@ -23,5 +23,7 @@ public interface MovieTheatreDAO {
   
     List<MovieTheatre> getMovieTiming(String theatreName) throws DbException;
 
-    List<MovieTheatre> getNumSeats(int movieId) throws Exception ;
+    List<MovieTheatre> getNumSeats(int movieId) throws DbException ;
+    
+    List<MovieTheatre> getActiveTheatreDetails(int movieId) throws DbException;
 }

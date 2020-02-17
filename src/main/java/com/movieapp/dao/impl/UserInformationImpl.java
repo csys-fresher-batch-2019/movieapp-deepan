@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.movieapp.DbConnection;
 import com.movieapp.DbException;
 import com.movieapp.dao.UserInformationDAO;
+import com.movieapp.model.MovieList;
 import com.movieapp.model.UserInformation;
 
 public class UserInformationImpl implements UserInformationDAO{
@@ -53,8 +56,9 @@ public class UserInformationImpl implements UserInformationDAO{
 		
 		
 		
-		public String login(String emailId, String epassword) throws DbException {
-            String sql = "select email_id,epassword from users where email_id= '" + emailId + "' and epassword = '"+ epassword + "'";
+		public Integer login(String emailId, String epassword) throws DbException {
+           Integer userId = null;
+			String sql = "select user_id,email_id,epassword from users where email_id= '" + emailId + "' and epassword = '"+ epassword + "'";
 			//System.out.println(sql);
             String s=null;
 			try (Connection con=DbConnection.getConnection();
@@ -64,25 +68,21 @@ public class UserInformationImpl implements UserInformationDAO{
 				
 				if (row.next())
 				{
-					String emailid1 = row.getString("email_id");
-					String password1 = row.getString("epassword");
-					if (emailid1.equals(emailId) && password1.equals(epassword))
-						s="success";
-					}
-				else
-					s="failure";
+					userId = row.getInt("user_id");
+				}
 } 
 		catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return(s);
+			return userId;
 }
 
 		
 		
 		
-		public String updatePassword(String emailId,String epassword) throws DbException
+		public boolean updatePassword(String emailId,String epassword) throws DbException
 		{
+			boolean updated = false;
 			String sqlb = "update users set epassword=? where email_id=?";
 			System.out.println("");
 			try (	Connection con = DbConnection.getConnection();
@@ -91,15 +91,41 @@ public class UserInformationImpl implements UserInformationDAO{
 				pst.setString(1, epassword);
 				pst.setString(2, emailId);
 				int rowb = pst.executeUpdate();
+				if(rowb ==1) {
+					updated = true;
+				}
 				//System.out.println(rowb);
 			}
 				
 			 catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return epassword;
+			return updated;
 }
+		public String getEmailId(int userId) throws DbException {
+			
+			String sqla = "Select email_id from users where user_id=?";
+			//System.out.println(sqla);
+			System.out.println("");
+			String email=null;
+			try (	Connection con = DbConnection.getConnection();
+					PreparedStatement pst = con.prepareStatement(sqla);)
+			{
+			pst.setInt(1, userId);
+			try(ResultSet rs = pst.executeQuery();)
+					
+			{
+			
+				if (rs.next()) 
+				{
+					email=rs.getString("email_id");
+				}
+					
+			} }catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return email;
+		}
 		}
 
 		
