@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+
 public class DbConnection {
 	
 	public static Connection getConnection(){
@@ -23,5 +26,18 @@ public class DbConnection {
 
 		return connection;
 		}
-
+	
+	
+	public static Jdbi getJdbi() {
+		Jdbi jdbi=null;
+		Connection connection;
+		try {
+			connection=getConnection();
+			 jdbi = Jdbi.create(connection);
+			jdbi.installPlugin(new SqlObjectPlugin());
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return jdbi;
+	}
 }
