@@ -12,12 +12,13 @@ public class TestTheatreList {
 	public static void main(String[] args) throws DbException {
 		
 		  //testInsert();
-         // testDeleteTheatreDetails();
-         // testUpdateTheatreRating();
-        //testAllTheatreDetails();
-         //testGetTheatreName();
+          // testDeleteTheatreDetails();
+          // testUpdateTheatreRating();
+          //testAllTheatreDetails();
+          //testGetTheatreName();
 
 	}
+	
 	private static void testInsert() throws DbException
 	{
 		 List<TheatreList> list=new ArrayList<TheatreList>();
@@ -38,6 +39,8 @@ public class TestTheatreList {
 		 System.out.println(theatreList);
 		 }
 	}
+	
+	
 	private static void testDeleteTheatreDetails() throws DbException
 	{
 		TheatreListDAOImpl obj=new TheatreListDAOImpl();
@@ -49,6 +52,8 @@ public class TestTheatreList {
 		sc.close();
 		
 	}
+	
+	
 	private static void testUpdateTheatreRating() throws DbException
 	{
 		TheatreListDAOImpl obj=new TheatreListDAOImpl();
@@ -62,8 +67,12 @@ public class TestTheatreList {
 		sc.close();
 	}
 	
-	private static void testAllTheatreDetails() throws DbException
-	{
+	
+	
+	                                 //list  all theatre details
+	                                 
+	private static void testAllTheatreDetails() throws DbException{
+		
 		 List<TheatreList> list=new ArrayList<TheatreList>();
 		 TheatreListDAOImpl obj=new TheatreListDAOImpl();
 
@@ -73,17 +82,21 @@ public class TestTheatreList {
 		System.out.println(theatreList);
 		}
 	}
-	private static void testGetTheatreName() throws DbException
-	{
+	
+	
+	private static void testGetTheatreName() throws DbException{
+		
+		
 		 TheatreListDAOImpl obj=new TheatreListDAOImpl();
 		 List<TheatreList> list=new ArrayList<TheatreList>();
 		 Scanner sc=new Scanner(System.in);
-			System.out.println("### Search Theatre Name By Address ###");
-			System.out.println("Enter Theatre Address:");
-			String theatreAddress=sc.next();
-			list=obj.getTheatreName(theatreAddress);
-			for(TheatreList theatreList:list)
-			{
+		 System.out.println("### Search Theatre Name By Address ###");
+		 System.out.println("Enter Theatre Address:");
+		 String theatreAddress=sc.next();
+		 list=obj.getTheatreName(theatreAddress);
+			
+	     for(TheatreList theatreList:list){
+	    	 
 			System.out.println(theatreList.getTheatreName());
 			}
 			

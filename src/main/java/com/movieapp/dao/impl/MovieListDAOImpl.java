@@ -21,7 +21,7 @@ public class MovieListDAOImpl implements MovieListDAO {
 	
 public void addMovie(MovieList movie) throws DbException {
 		
-		String sql = "insert into movie(movie_id,movie_name,movie_type,movie_language,movie_rating,movie_duration,released_date)values(movie_id_seq.nextval,?,?,?,?,?,?)";
+		String sql = "insert into movie(movie_id,movie_name,movie_type,movie_language,movie_rating,movie_duration,released_date,image_url)values(movie_id_seq.nextval,?,?,?,?,?,?,?)";
 		System.out.println("");
 		//System.out.println(sql);
 		try (	
@@ -34,6 +34,7 @@ public void addMovie(MovieList movie) throws DbException {
 			pst.setInt(4, movie.getMovieRating());
 			pst.setInt(5, movie.getMovieDuration());
 			pst.setDate(6, Date.valueOf(movie.getReleasedDate()));
+			pst.setString(7, movie.getImageUrl());
 			int row = pst.executeUpdate();
 			System.out.println(row);
 		} catch (SQLException e) {
