@@ -4,13 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.movieapp.DbConnection;
 import com.movieapp.DbException;
 import com.movieapp.dao.UserInformationDAO;
-import com.movieapp.model.MovieList;
 import com.movieapp.model.UserInformation;
 
 public class UserInformationImpl implements UserInformationDAO{

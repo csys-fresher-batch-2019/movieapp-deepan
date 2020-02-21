@@ -12,6 +12,7 @@ public class MovieList {
 	private int movieRating;
 	private int movieDuration;
 	private String imageUrl;
+
 	public String getImageUrl() {
 		return imageUrl;
 	}

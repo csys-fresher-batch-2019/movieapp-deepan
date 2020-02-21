@@ -5,10 +5,17 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.movieapp.DbConnection;
 import com.movieapp.DbException;
 import com.movieapp.dao.TicketBookingDAO;
+import com.movieapp.model.TheatreList;
 import com.movieapp.model.TicketBooking;
 
 public class TicketBookingDAOImpl implements TicketBookingDAO {
@@ -100,5 +107,70 @@ public Long getMobileNumber(int usersId) throws DbException {
 		}
 		return a;
 	}
+
+
+
+@Override
+public List<TicketBooking> getUserBookedDetails(int userId) throws DbException {
+	
+	List<TicketBooking> list = new ArrayList<TicketBooking>();
+	String sql = "select * from booked where users_id=?";
+	// System.out.println(sql);
+	System.out.println("");
+	try (	Connection con = DbConnection.getConnection();
+			PreparedStatement stmt = con.prepareStatement(sql);)
+	{
+		       stmt.setInt(1, userId);
+		try(	ResultSet rs = stmt.executeQuery();)
+		{
+		while (rs.next()) {
+			TicketBooking tl = new TicketBooking();
+			tl.setBookedId(rs.getInt("booked_id"));
+			tl.setMovieTheaterId(rs.getInt("movie_theatre_id"));
+			tl.setUsersId(rs.getInt("users_id"));
+			tl.setBookedSeats(rs.getInt("booked_seats"));
+			Date d=rs.getDate("show_date");
+			if(d!=null) {
+				LocalDate ld=d.toLocalDate();
+				tl.setShowDate(ld);
+			}
+			
+			Date sd=rs.getDate("booked_date");
+			if(sd!=null) {
+				LocalDate sld=sd.toLocalDate();
+				tl.setBookedDate(sld);
+			}
+			
+			
+			tl.setAmount(rs.getInt("amount"));
+		    tl.setPaymentStatus(rs.getString("booked_status"));
+			list.add(tl);
+		}
+		}	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+
+	return list;
+}
+
+
+
+@Override
+public void cancelTicket(String bookedId) throws DbException {
+	String sql = "update booked set booked_status='CANCELLED' where booked_id = ?";
+	System.out.println(sql);
+	try(Connection connection =DbConnection.getConnection() ;
+
+	PreparedStatement pst = connection.prepareStatement(sql);)
+	{
+	pst.setString(1,bookedId);
+
+	int rows=pst.executeUpdate();
+	System.out.println(rows);
+	}catch(SQLException e)
+	{
+		e.printStackTrace();
+	}	
+}
 
 }

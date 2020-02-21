@@ -17,10 +17,8 @@ public class TestUserInformation {
 		// testAddUsers();
 		// testDeleteUsers();
 		testLoginCheck();
-		//testForgetPassword();
 
 	}
-	
 
 	private static void testAddUsers() throws Exception {
 
@@ -55,25 +53,21 @@ public class TestUserInformation {
 		UserInformationImpl obj = new UserInformationImpl();
 		obj.deleteUserInformation(11164);
 	}
-	
 
 	private static void testLoginCheck() throws Exception {
 
 		UserInformationImpl obj = new UserInformationImpl();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter Email Id:");
-		 String emailId = sc.next();
+		String emailId = sc.next();
 		System.out.println("Enter Password:");
 		String epassword = sc.next();
 
 		try {
 			Integer str = obj.login(emailId, epassword);
-			if (str==null)
-			{
+			if (str == null) {
 				testForgetPassword(emailId);
-			}
-			else
-			{
+			} else {
 				System.out.println("login success");
 			}
 
@@ -83,14 +77,11 @@ public class TestUserInformation {
 		}
 
 	}
-	
-	
-	
 
 	private static void testForgetPassword(String email) throws Exception {
-		
+
 		Scanner sc = new Scanner(System.in);
-		
+
 		SendMailSSL.sendEmail(email);
 		System.out.println("Your OTP is send to your Mail");
 		System.out.println("Enter Your OTP:");
@@ -102,9 +93,9 @@ public class TestUserInformation {
 			System.out.println("Enter new password");
 			String pass = sc.next();
 			UserInformationImpl im = new UserInformationImpl();
-			
-			boolean password=im.updatePassword(email, pass);
-			System.out.println("Your Password is Sucessfully Changed"+password+""+email);
+
+			boolean password = im.updatePassword(email, pass);
+			System.out.println("Your Password is Sucessfully Changed" + password + "" + email);
 
 		} else
 			System.out.println("Wrong OTP!");

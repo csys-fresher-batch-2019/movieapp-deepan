@@ -1,6 +1,7 @@
 package com.movieapp.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TicketBooking {
@@ -10,7 +11,7 @@ public class TicketBooking {
 	private int bookedSeats;
 	private int amount;
 	private String paymentStatus;
-	private Date bookedDate;
+	private LocalDate bookedDate;
 	private Long mobileNum;
 	private LocalDate showDate;
 	@Override
@@ -46,8 +47,8 @@ public class TicketBooking {
 	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public int setAmount(int amount) {
+		return this.amount = amount;
 	}
 	public String getPaymentStatus() {
 		return paymentStatus;
@@ -55,11 +56,11 @@ public class TicketBooking {
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
-	public Date getBookedDate() {
+	public LocalDate getBookedDate() {
 		return bookedDate;
 	}
-	public void setBookedDate(Date bookedDate) {
-		this.bookedDate = bookedDate;
+	public void setBookedDate(LocalDate sld) {
+		this.bookedDate = sld;
 	}
 	public Long getMobileNum() {
 		return mobileNum;

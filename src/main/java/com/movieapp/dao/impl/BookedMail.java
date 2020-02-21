@@ -20,7 +20,7 @@ public class BookedMail {
 	
 	public static void send(final String from,final String password,String to,String sub,String Msg,int bookedId,int userId,int movieTheatreId,int bookedSeats,int amount) throws Exception
 	{  
-		
+		System.out.println("Mail send");
 		Properties props = new Properties();    
         props.put("mail.smtp.host", "smtp.gmail.com");    
         props.put("mail.smtp.socketFactory.port", "465");    
@@ -47,7 +47,7 @@ public class BookedMail {
 	    	messageBodyPart2.setText(Msg+"\n\t");
 	    	BodyPart messageBodyPart3 = new MimeBodyPart(); 
 	    	messageBodyPart3.setText("\n\t\tYour Booked Id : "+bookedId);
-	    	BodyPart messageBodyPart4 = new MimeBodyPart(); 
+            BodyPart messageBodyPart4 = new MimeBodyPart(); 
 	    	messageBodyPart4.setText("\n\t\tYour User Id : "+userId);
 	    	BodyPart messageBodyPart5 = new MimeBodyPart(); 
 	    	messageBodyPart5.setText("\n\t\tYour Movie_Theatre Id : "+movieTheatreId);
@@ -64,7 +64,7 @@ public class BookedMail {
 	    	multipart.addBodyPart(messageBodyPart1);  
 	    	multipart.addBodyPart(messageBodyPart2);
 	    	multipart.addBodyPart(messageBodyPart3);
-	    	multipart.addBodyPart(messageBodyPart4);
+	  	    multipart.addBodyPart(messageBodyPart4);
 	    	multipart.addBodyPart(messageBodyPart5);
 	    	multipart.addBodyPart(messageBodyPart6);  
 	    	multipart.addBodyPart(messageBodyPart7);
@@ -77,6 +77,7 @@ public class BookedMail {
 	}
     catch (MessagingException e) 
     {
+    	e.printStackTrace();
     	throw new RuntimeException(e);
     }
 	}
