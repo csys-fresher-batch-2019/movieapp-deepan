@@ -71,7 +71,7 @@ public class TestMovieTheatre {
 
 	}
 
-	// To find movie with theatre details
+// To find movie with theatre details
 	private static void testGetTheatreDetails() throws DbException {
 
 		MovieTheatreDAOImpl impl = new MovieTheatreDAOImpl();

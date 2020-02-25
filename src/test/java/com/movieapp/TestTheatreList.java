@@ -15,7 +15,7 @@ public class TestTheatreList {
           // testDeleteTheatreDetails();
           // testUpdateTheatreRating();
           //testAllTheatreDetails();
-          //testGetTheatreName();
+          testGetTheatreName();
 
 	}
 	

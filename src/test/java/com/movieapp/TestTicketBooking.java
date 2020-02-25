@@ -17,10 +17,10 @@ public class TestTicketBooking {
 		// testInsert();
 		// testDelete();
 		// testBookedDetails();
-		// testgetPrice();
-		/*
-		 * TicketBookingDAOImpl impl=new TicketBookingDAOImpl(); impl.cancelTicket(124);
-		 */
+		//testgetPrice();
+		testCancelTicket();
+		
+		
 
 	}
 
@@ -88,7 +88,13 @@ public class TestTicketBooking {
 		System.out.println(list);
 		for (TicketBooking Tb : list) {
 			System.out.println(Tb);
-
 		}
+		}
+		
+	
+		public static void testCancelTicket() throws DbException
+		{
+		TicketBookingDAOImpl impl=new TicketBookingDAOImpl(); 
+		impl.cancelTicket("130");
 	}
 }
